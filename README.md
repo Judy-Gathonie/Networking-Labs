@@ -3,31 +3,32 @@
 This Cisco Packet Tracer project demonstrates the design and implementation of a small enterprise network connecting the **Accounts** and **Delivery** departments.
 
 ## Objectives
-- Provide network connectivity for two PCs in each department.
-- Segment departments into separate subnets.
-- Enable communication between departments through a router.
-- Use the 192.168.40.0 network block.
+- Separate departments into distinct subnets for security and traffic control.
+- Enable cross-department communication through an intermediate router.
+- Provide reliable network connectivity for two PCs and one printer in each department.
+- Allocate and optimize IP resources using the `192.168.40.0/24` block.
 
 ## Network Devices
-- 1 Router  
-- 2 Cisco 2960 Switches  
-- 4 PCs  
+- **1x Router:** Cisco ISR4331
+- **2x Switches:** Cisco Catalyst 2960
+- **4x End Devices:** Desktop PCs (2 per department)
+- **2x Peripherals:** Network Printers (1 per department)
 
-## IP Addressing
+## IP Addressing Schema
 
-| Department | Subnet | Gateway |
-|------------|---------|----------|
-| Accounts | 192.168.40.0/25 | 192.168.40.1 |
-| Delivery | 192.168.40.128/25 | 192.168.40.129 |
+| Department | Network ID | Subnet Mask | Usable Host IP Range | Default Gateway | Broadcast IP |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Accounts** | 192.168.40.0 | 255.255.255.128 (/25) | 192.168.40.2 – 192.168.40.126 | 192.168.40.1 | 192.168.40.127 |
+| **Delivery** | 192.168.40.128 | 255.255.255.128 (/25) | 192.168.40.130 – 192.168.40.254 | 192.168.40.129 | 192.168.40.255 |
 
-## Features
-- Subnetting using /25 networks  
-- Inter-subnet routing  
-- Static IP configuration  
-- End-to-end connectivity verification using ping  
+## Technical Features
+- **Variable Length Subnet Masking (VLSM):** Segmented a class C network block using `/25` masks.
+- **Inter-Subnet Routing:** Configured physical router interfaces to act as default gateways.
+- **Static IP Allocation:** Manual IP assignments on all terminal host systems and network interfaces.
+- **ICMP Validation:** Verified multi-hop end-to-end connectivity using standard ping tests.
 
 ## Verification
-Successful ICMP tests confirm communication between devices in different departments through the router.
+Successful ICMP echo replies confirm operational network layers and accurate configuration routing across both segments.
 
-## File
-- `SimpleNetwork.pkt` – Cisco Packet Tracer topology and configuration
+## Project Files
+- `SimpleNetwork.pkt` – Cisco Packet Tracer network topology and configuration schema.
